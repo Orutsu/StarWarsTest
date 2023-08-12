@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {COLORS} from '../../../styles';
+import {COLORS} from 'src/styles';
 
 export default StyleSheet.create({
   safeAreaViewContainer: {
