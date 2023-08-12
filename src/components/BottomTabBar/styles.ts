@@ -3,36 +3,25 @@ import {COLORS} from '../../styles';
 
 export default StyleSheet.create({
   safeAreaContainer: {
-    backgroundColor: COLORS.BLACK,
+    backgroundColor: COLORS.BLUE,
   },
-  tabbar: {
+  tabBar: {
     backgroundColor: COLORS.BLACK,
-    height: 58,
-    marginHorizontal: 10,
+    height: 60,
     paddingHorizontal: 40,
-    paddingTop: 14,
-    paddingBottom: 13,
-    borderRadius: 16,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   notActiveOption: {
     opacity: 0.3,
   },
   optionsText: {
-    fontSize: 10,
-    lineHeight: 12,
+    fontSize: 12,
+    lineHeight: 14,
   },
   optionContainer: {
-    height: 41,
-    width: 50,
+    height: 40,
+    width: 100,
     alignItems: 'center',
   },
   icon: {

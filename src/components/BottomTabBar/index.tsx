@@ -18,15 +18,21 @@ type TabBarItem = {
 const BottomTabBar = () => {
   const tabBarItems: TabBarItem[] = [
     {
-      icon: <Icon name="HeartEmpty" width={28} height={28} />,
-      iconActive: <Icon name="HeartFill" width={28} height={28} />,
+      icon: <Icon name="Film" color={COLORS.WHITE} width={28} height={28} />,
+      iconActive: (
+        <Icon name="Film" color={COLORS.YELLOW} width={28} height={28} />
+      ),
       label: 'Episodes',
       route: 'Episodes',
       activeRoutes: ['Episodes_list', 'Movie_Details', 'Episodes'],
     },
     {
-      icon: <Icon name="HeartEmpty" width={28} height={28} />,
-      iconActive: <Icon name="HeartFill" width={28} height={28} />,
+      icon: (
+        <Icon name="HeartEmpty" color={COLORS.WHITE} width={28} height={28} />
+      ),
+      iconActive: (
+        <Icon name="HeartFill" color={COLORS.YELLOW} width={28} height={28} />
+      ),
       label: 'Liked Characters',
       route: 'Liked_Characters',
       activeRoutes: [
@@ -42,7 +48,7 @@ const BottomTabBar = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <View style={[positionHelpers.rowFill, styles.tabbar]}>
+      <View style={[positionHelpers.rowFill, styles.tabBar]}>
         {tabBarItems.map(item => {
           const isActive = item.activeRoutes.includes(
             activeRouteName as AllRoutes,
