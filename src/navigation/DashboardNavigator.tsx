@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {DASHBOARD_ROUTES} from './routes';
 import EpisodesNavigator from './EpisodesNavigator';
 import LikedCharactersNavigator from './LikedCharactersNavigator';
+import BottomTabBar from 'src/components/BottomTabBar';
 
 const DashboardTabs = createBottomTabNavigator();
 
@@ -12,7 +13,7 @@ const DashboardNavigator = () => (
       headerShown: false,
     })}
     initialRouteName={DASHBOARD_ROUTES.EPISODES}
-    tabBar={() => null}>
+    tabBar={BottomTabBar}>
     <DashboardTabs.Screen
       name={DASHBOARD_ROUTES.EPISODES}
       component={EpisodesNavigator}
