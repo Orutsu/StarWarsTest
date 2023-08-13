@@ -8,7 +8,7 @@ export default StyleSheet.create({
   },
   headerText: {
     color: COLORS.BLACK,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   filmItemContainer: {

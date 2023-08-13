@@ -6,6 +6,13 @@ import MovieDetailsScreen from '../screens/Episodes/MovieDetailsScreen';
 
 const Stack = createStackNavigator();
 
+export type EpisodesParamList = {
+  [EPISODES_ROUTES.EPISODES_LIST]: undefined;
+  [EPISODES_ROUTES.MOVIE_DETAILS]: {
+    episodeId: string;
+  };
+};
+
 const EpisodesNavigator = () => (
   <Stack.Navigator
     screenOptions={() => ({
