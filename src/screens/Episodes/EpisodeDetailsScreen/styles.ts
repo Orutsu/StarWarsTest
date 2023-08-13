@@ -45,17 +45,4 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  characterItemContainer: {
-    backgroundColor: COLORS.BLACK,
-    borderRadius: 16,
-    paddingHorizontal: 8,
-    paddingVertical: 8,
-  },
-  characterItemText: {
-    color: COLORS.YELLOW,
-    fontSize: 14,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    textTransform: 'uppercase',
-  },
 });

@@ -18,6 +18,7 @@ import {Film, Person} from 'src/__generated__/graphql';
 import {COLORS, positionHelpers, spacingHelpers} from 'src/styles';
 import {Icon} from 'src/components/Icon';
 import navigationService from 'src/navigation/navigationService';
+import CharacterItem from 'src/components/CharacterItem';
 
 export type EpisodeDetailsScreenProps = {
   navigation: StackNavigationProp<EpisodesParamList, 'Episode_Details'>;
@@ -183,15 +184,15 @@ const EpisodeDetailsScreen: FC<EpisodeDetailsScreenProps> = props => {
         contentContainerStyle={[spacingHelpers.pH16, spacingHelpers.pB16]}
         renderItem={({item}) => {
           return (
-            <TouchableOpacity
+            <CharacterItem
               onPress={() => {
                 navigationService.push('Episodes_Character_Details', {
                   characterId: item?.id,
                 });
               }}
-              style={[styles.characterItemContainer, spacingHelpers.mT8]}>
-              <Text style={[styles.characterItemText]}>{item?.name}</Text>
-            </TouchableOpacity>
+              person={item}
+              style={spacingHelpers.mT8}
+            />
           );
         }}
         onEndReached={onEndReached}
