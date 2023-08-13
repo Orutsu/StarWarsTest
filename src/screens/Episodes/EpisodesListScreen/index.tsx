@@ -123,7 +123,7 @@ const EpisodesListScreen = () => {
               }}
               style={[styles.filmItemContainer, spacingHelpers.mT16]}>
               <Text style={styles.filmTitle}>{item?.title}</Text>
-              <Text style={styles.filmReleaseDate}>{item?.id}</Text>
+              <Text style={styles.filmReleaseDate}>{item?.releaseDate}</Text>
               <Text style={styles.filmOpeningScroll}>
                 {`${item?.openingCrawl?.substring(0, 50)}...`}
               </Text>
