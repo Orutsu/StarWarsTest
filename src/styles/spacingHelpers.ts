@@ -30,7 +30,14 @@ export const mT16: ViewStyle = {
   marginTop: 16,
 };
 
+export const mT8: ViewStyle = {
+  marginTop: 8,
+};
+
 // Margin Left
+export const mL8: ViewStyle = {
+  marginLeft: 8,
+};
 
 // Margin Right
 

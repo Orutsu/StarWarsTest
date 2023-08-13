@@ -31,6 +31,12 @@ const EpisodesListScreen = () => {
   );
   const {data, loading, error} = useQuery<FetchFilms>(FETCH_ALL_FILMS);
 
+  useEffect(() => {
+    if (error) {
+      Alert.alert('Error happened!', error.message);
+    }
+  }, [error]);
+
   const episodes = useMemo(() => {
     if (!data) {
       return [];
@@ -54,12 +60,6 @@ const EpisodesListScreen = () => {
       });
     }
   }, [currentSortOrder, data]);
-
-  useEffect(() => {
-    if (error) {
-      Alert.alert('Error happened!', error.message);
-    }
-  }, [error]);
 
   const EpisodesEmptyComponent = useCallback(() => {
     if (loading) {
