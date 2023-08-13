@@ -1,8 +1,5 @@
 import React from 'react';
-// Components
 import {ViewStyle, Text, TouchableOpacity} from 'react-native';
-
-// Styles
 import styles from './styles';
 import {Film, Maybe} from 'src/__generated__/graphql';
 
