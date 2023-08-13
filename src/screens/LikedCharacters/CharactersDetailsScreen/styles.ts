@@ -21,4 +21,13 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  likeText: {
+    color: COLORS.YELLOW,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
+  likeContainer: {
+    width: 100,
+  },
 });

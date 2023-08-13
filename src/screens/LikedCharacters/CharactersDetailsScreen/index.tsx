@@ -19,6 +19,12 @@ import {COLORS, positionHelpers, spacingHelpers} from 'src/styles';
 import navigationService from 'src/navigation/navigationService';
 import EpisodeItem from 'src/components/EpisodeItem';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useDispatch} from 'react-redux';
+import {useTypedSelector} from 'src/store';
+import {
+  addLikedCharacter,
+  removeLikedCharacter,
+} from 'src/store/LikedCharacters';
 
 export type CharactersDetailsScreenProps = {
   navigation: StackNavigationProp<
@@ -33,6 +39,8 @@ interface FetchPerson {
 }
 
 const CharactersDetailsScreen: FC<CharactersDetailsScreenProps> = props => {
+  const {likedCharacters} = useTypedSelector(store => store.likedCharacters);
+  const dispatch = useDispatch();
   const {data, loading, error} = useQuery<FetchPerson>(
     FETCH_CHARACTER_DETAILS,
     {
@@ -42,6 +50,12 @@ const CharactersDetailsScreen: FC<CharactersDetailsScreenProps> = props => {
     },
   );
 
+  useEffect(() => {
+    if (error) {
+      Alert.alert('Error happened!', error.message);
+    }
+  }, [error]);
+
   const character = useMemo(() => {
     if (!data) {
       return null;
@@ -50,15 +64,29 @@ const CharactersDetailsScreen: FC<CharactersDetailsScreenProps> = props => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (error) {
-      Alert.alert('Error happened!', error.message);
+  const isCharacterLiked = useMemo(() => {
+    if (
+      likedCharacters.find(
+        likedCharacter => likedCharacter?.id === character?.id,
+      )
+    ) {
+      return true;
+    } else {
+      return false;
     }
-  }, [error]);
+  }, [character, likedCharacters]);
 
   const handleOnBack = useCallback(() => {
     navigationService.goBack();
   }, []);
+
+  const handleLike = useCallback(() => {
+    if (isCharacterLiked) {
+      dispatch(removeLikedCharacter(character?.id));
+    } else {
+      dispatch(addLikedCharacter(character));
+    }
+  }, [character, dispatch, isCharacterLiked]);
 
   if (loading) {
     return (
@@ -83,31 +111,59 @@ const CharactersDetailsScreen: FC<CharactersDetailsScreenProps> = props => {
             <Text style={styles.characterName}>{character?.name}</Text>
           </View>
         </View>
-        <Text style={[styles.subTitle, spacingHelpers.mT8]}>
-          Personal information
-        </Text>
-        <Text style={[styles.personalInformationFields, spacingHelpers.mT8]}>
-          Birth Year:{' '}
-          <Text style={{color: COLORS.DARK_YELLOW}}>
-            {character?.birthYear}
-          </Text>
-        </Text>
-        <Text style={[styles.personalInformationFields, spacingHelpers.mT8]}>
-          Height:{' '}
-          <Text style={{color: COLORS.DARK_YELLOW}}>
-            {character?.height} cm
-          </Text>
-        </Text>
-        <Text style={[styles.personalInformationFields, spacingHelpers.mT8]}>
-          Mass:{' '}
-          <Text style={{color: COLORS.DARK_YELLOW}}>{character?.mass} kg</Text>
-        </Text>
-        <Text style={[styles.personalInformationFields, spacingHelpers.mT8]}>
-          Homeworld:{' '}
-          <Text style={{color: COLORS.DARK_YELLOW}}>
-            {character?.homeworld?.name}
-          </Text>
-        </Text>
+        <View style={positionHelpers.rowFill}>
+          <View>
+            <Text style={[styles.subTitle, spacingHelpers.mT8]}>
+              Personal information
+            </Text>
+            <Text
+              style={[styles.personalInformationFields, spacingHelpers.mT8]}>
+              Birth Year:{' '}
+              <Text style={{color: COLORS.DARK_YELLOW}}>
+                {character?.birthYear}
+              </Text>
+            </Text>
+            <Text
+              style={[styles.personalInformationFields, spacingHelpers.mT8]}>
+              Height:{' '}
+              <Text style={{color: COLORS.DARK_YELLOW}}>
+                {character?.height} cm
+              </Text>
+            </Text>
+            <Text
+              style={[styles.personalInformationFields, spacingHelpers.mT8]}>
+              Mass:{' '}
+              <Text style={{color: COLORS.DARK_YELLOW}}>
+                {character?.mass} kg
+              </Text>
+            </Text>
+            <Text
+              style={[styles.personalInformationFields, spacingHelpers.mT8]}>
+              Homeworld:{' '}
+              <Text style={{color: COLORS.DARK_YELLOW}}>
+                {character?.homeworld?.name}
+              </Text>
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={handleLike}
+            style={[styles.likeContainer, positionHelpers.alighCenter]}>
+            <Icon
+              name={isCharacterLiked ? 'LikeFill' : 'LikeEmpty'}
+              width={100}
+              height={100}
+              color={isCharacterLiked ? COLORS.YELLOW : COLORS.WHITE}
+            />
+            <Text
+              style={[
+                styles.likeText,
+                spacingHelpers.mT4,
+                {color: isCharacterLiked ? COLORS.YELLOW : COLORS.WHITE},
+              ]}>
+              {isCharacterLiked ? 'Remove' : 'Like'}
+            </Text>
+          </TouchableOpacity>
+        </View>
         <Text style={[styles.subTitle, spacingHelpers.mT16]}>Appearances</Text>
         {character?.filmConnection?.films?.map(item => {
           return (

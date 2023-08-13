@@ -8,6 +8,8 @@ import {
   HttpLink,
 } from '@apollo/client';
 import NavigationContainer from './navigationContainer';
+import {Provider} from 'react-redux';
+import store from './store';
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -20,7 +22,9 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <ApolloProvider client={client}>
-        <NavigationContainer />
+        <Provider store={store}>
+          <NavigationContainer />
+        </Provider>
       </ApolloProvider>
     </SafeAreaProvider>
   );
