@@ -4,7 +4,14 @@ import {LIKED_CHARACTERS_ROUTES} from './routes';
 import LikedCharactersListScreen from '../screens/LikedCharacters/LikedCharactersListScreen';
 import CharactersDetailsScreen from '../screens/LikedCharacters/CharactersDetailsScreen';
 
-const Stack = createStackNavigator();
+export type LikedCharactersParamList = {
+  [LIKED_CHARACTERS_ROUTES.LIKED_CHARACTERS_LIST]: undefined;
+  [LIKED_CHARACTERS_ROUTES.CHARACTER_DETAILS]: {
+    characterId: string;
+  };
+};
+
+const Stack = createStackNavigator<LikedCharactersParamList>();
 
 const LikedCharactersNavigator = () => (
   <Stack.Navigator

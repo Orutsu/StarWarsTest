@@ -19,16 +19,17 @@ import {COLORS, positionHelpers, spacingHelpers} from 'src/styles';
 import {Icon} from 'src/components/Icon';
 import navigationService from 'src/navigation/navigationService';
 
-export type MovieDetailsScreenProps = {
-  navigation: StackNavigationProp<EpisodesParamList, 'Movie_Details'>;
-  route: RouteProp<EpisodesParamList, 'Movie_Details'>;
+export type EpisodeDetailsScreenProps = {
+  navigation: StackNavigationProp<EpisodesParamList, 'Episode_Details'>;
+  route: RouteProp<EpisodesParamList, 'Episode_Details'>;
 };
 
 interface FetchFilm {
   film: Film;
 }
 
-const MovieDetailsScreen: FC<MovieDetailsScreenProps> = props => {
+const EpisodeDetailsScreen: FC<EpisodeDetailsScreenProps> = props => {
+  const [episodeId, setEpisodeId] = useState(props.route.params?.episodeId);
   const [pagination, setPagination] = useState({first: 10, last: 10});
   const [
     onEndReachedCalledDuringMomentum,
@@ -42,9 +43,15 @@ const MovieDetailsScreen: FC<MovieDetailsScreenProps> = props => {
     error: filmError,
   } = useQuery<FetchFilm>(FETCH_FILM_DETAILS, {
     variables: {
-      filmId: props.route.params?.episodeId,
+      filmId: episodeId,
     },
   });
+
+  useEffect(() => {
+    setCharacters([]);
+    setEpisodeId(props.route.params?.episodeId);
+    setPagination({first: 10, last: 10});
+  }, [props.route.params?.episodeId]);
 
   const {
     data: charactersData,
@@ -176,9 +183,15 @@ const MovieDetailsScreen: FC<MovieDetailsScreenProps> = props => {
         contentContainerStyle={[spacingHelpers.pH16, spacingHelpers.pB16]}
         renderItem={({item}) => {
           return (
-            <View style={[styles.characterItemContainer, spacingHelpers.mT8]}>
+            <TouchableOpacity
+              onPress={() => {
+                navigationService.push('Episodes_Character_Details', {
+                  characterId: item?.id,
+                });
+              }}
+              style={[styles.characterItemContainer, spacingHelpers.mT8]}>
               <Text style={[styles.characterItemText]}>{item?.name}</Text>
-            </View>
+            </TouchableOpacity>
           );
         }}
         onEndReached={onEndReached}
@@ -192,4 +205,4 @@ const MovieDetailsScreen: FC<MovieDetailsScreenProps> = props => {
   );
 };
 
-export default MovieDetailsScreen;
+export default EpisodeDetailsScreen;

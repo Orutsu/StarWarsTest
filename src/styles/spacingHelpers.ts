@@ -26,12 +26,16 @@ export const pB16: ViewStyle = {
 // Margin Vertical
 
 // Margin Top
-export const mT16: ViewStyle = {
-  marginTop: 16,
+export const mT4: ViewStyle = {
+  marginTop: 4,
 };
 
 export const mT8: ViewStyle = {
   marginTop: 8,
+};
+
+export const mT16: ViewStyle = {
+  marginTop: 16,
 };
 
 // Margin Left

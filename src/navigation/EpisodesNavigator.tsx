@@ -2,12 +2,16 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {EPISODES_ROUTES} from './routes';
 import EpisodesListScreen from '../screens/Episodes/EpisodesListScreen';
-import MovieDetailsScreen from '../screens/Episodes/MovieDetailsScreen';
+import CharactersDetailsScreen from 'src/screens/LikedCharacters/CharactersDetailsScreen';
+import EpisodeDetailsScreen from 'src/screens/Episodes/EpisodeDetailsScreen';
 
 export type EpisodesParamList = {
   [EPISODES_ROUTES.EPISODES_LIST]: undefined;
-  [EPISODES_ROUTES.MOVIE_DETAILS]: {
+  [EPISODES_ROUTES.EPISODE_DETAILS]: {
     episodeId: string;
+  };
+  [EPISODES_ROUTES.CHARACTER_DETAILS]: {
+    characterId: string;
   };
 };
 
@@ -24,8 +28,12 @@ const EpisodesNavigator = () => (
       component={EpisodesListScreen}
     />
     <Stack.Screen
-      name={EPISODES_ROUTES.MOVIE_DETAILS}
-      component={MovieDetailsScreen}
+      name={EPISODES_ROUTES.EPISODE_DETAILS}
+      component={EpisodeDetailsScreen}
+    />
+    <Stack.Screen
+      name={EPISODES_ROUTES.CHARACTER_DETAILS}
+      component={CharactersDetailsScreen}
     />
   </Stack.Navigator>
 );

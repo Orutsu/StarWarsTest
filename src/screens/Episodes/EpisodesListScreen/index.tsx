@@ -15,6 +15,7 @@ import {FilmsConnection} from 'src/__generated__/graphql';
 import {COLORS, positionHelpers, spacingHelpers} from 'src/styles';
 import {Icon} from 'src/components/Icon';
 import navigationService from 'src/navigation/navigationService';
+import EpisodeItem from 'src/components/EpisodeItem';
 
 interface FetchFilms {
   allFilms: FilmsConnection;
@@ -112,22 +113,18 @@ const EpisodesListScreen = () => {
         contentContainerStyle={[spacingHelpers.pH16, spacingHelpers.pB16]}
         renderItem={({item}) => {
           return (
-            <TouchableOpacity
+            <EpisodeItem
               onPress={() => {
                 navigationService.navigate('Episodes', {
-                  screen: 'Movie_Details',
+                  screen: 'Episode_Details',
                   params: {
                     episodeId: item?.id,
                   },
                 });
               }}
-              style={[styles.filmItemContainer, spacingHelpers.mT16]}>
-              <Text style={styles.filmTitle}>{item?.title}</Text>
-              <Text style={styles.filmReleaseDate}>{item?.releaseDate}</Text>
-              <Text style={styles.filmOpeningScroll}>
-                {`${item?.openingCrawl?.substring(0, 50)}...`}
-              </Text>
-            </TouchableOpacity>
+              film={item}
+              style={spacingHelpers.mT16}
+            />
           );
         }}
       />

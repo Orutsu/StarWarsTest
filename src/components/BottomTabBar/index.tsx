@@ -24,7 +24,12 @@ const BottomTabBar = () => {
       ),
       label: 'Episodes',
       route: 'Episodes',
-      activeRoutes: ['Episodes_list', 'Movie_Details', 'Episodes'],
+      activeRoutes: [
+        'Episodes_list',
+        'Episode_Details',
+        'Episodes',
+        'Episodes_Character_Details',
+      ],
     },
     {
       icon: (
@@ -38,14 +43,13 @@ const BottomTabBar = () => {
       activeRoutes: [
         'Liked_Characters',
         'Liked_Characters_List',
-        'Character_Details',
+        'Liked_Character_Details',
       ],
     },
   ];
 
   const activeRouteName =
     navigationService.getActiveRouteNameWithDefaultRoute('Episodes_list');
-
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={[positionHelpers.rowFill, styles.tabBar]}>

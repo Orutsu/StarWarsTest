@@ -1,5 +1,5 @@
 import React from 'react';
-import {RootRoutes} from './routes';
+import {RootRoutes, AllRoutes} from './routes';
 import {
   NavigationContainerRef,
   CommonActions,
@@ -32,7 +32,7 @@ const navigate = (name: RootRoutes, params?: NavigationParams) => {
   }
 };
 
-const push = (name: RootRoutes, params?: NavigationParams) => {
+const push = (name: AllRoutes, params?: object) => {
   if (isReadyNavigation.current && navigationRef.current) {
     navigationRef.current.dispatch(StackActions.push(name, params));
   } else {

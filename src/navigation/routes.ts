@@ -5,12 +5,13 @@ export const DASHBOARD_ROUTES = {
 
 export const EPISODES_ROUTES = {
   EPISODES_LIST: 'Episodes_list',
-  MOVIE_DETAILS: 'Movie_Details',
+  EPISODE_DETAILS: 'Episode_Details',
+  CHARACTER_DETAILS: 'Episodes_Character_Details',
 } as const;
 
 export const LIKED_CHARACTERS_ROUTES = {
   LIKED_CHARACTERS_LIST: 'Liked_Characters_List',
-  CHARACTER_DETAILS: 'Character_Details',
+  CHARACTER_DETAILS: 'Liked_Character_Details',
 } as const;
 
 type valueof<T> = T[keyof T];
