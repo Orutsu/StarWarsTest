@@ -49,6 +49,7 @@ const CharactersDetailsScreen: FC<CharactersDetailsScreenProps> = props => {
       },
     },
   );
+  console.log('CharactersDetailsScreen', props.route.name);
 
   useEffect(() => {
     if (error) {
@@ -87,6 +88,20 @@ const CharactersDetailsScreen: FC<CharactersDetailsScreenProps> = props => {
       dispatch(addLikedCharacter(character));
     }
   }, [character, dispatch, isCharacterLiked]);
+
+  const handleNavigationToEpisode = useCallback(
+    (id?: string) => {
+      navigationService.push(
+        props.route.name === 'Liked_Character_Details'
+          ? 'Liked_Character_Episode_Details'
+          : 'Episode_Details',
+        {
+          episodeId: id,
+        },
+      );
+    },
+    [props.route.name],
+  );
 
   if (loading) {
     return (
@@ -169,11 +184,7 @@ const CharactersDetailsScreen: FC<CharactersDetailsScreenProps> = props => {
           return (
             <EpisodeItem
               key={`${item?.id}`}
-              onPress={() => {
-                navigationService.push('Episode_Details', {
-                  episodeId: item?.id,
-                });
-              }}
+              onPress={() => handleNavigationToEpisode(item?.id)}
               film={item}
               style={spacingHelpers.mT16}
             />

@@ -37,7 +37,7 @@ const EpisodeDetailsScreen: FC<EpisodeDetailsScreenProps> = props => {
     setOnEndReachedCalledDuringMomentum,
   ] = useState(true);
   const [characters, setCharacters] = useState<Person[]>([]);
-
+  console.log('EpisodeDetailsScreen', props.route.name);
   const {
     data: filmData,
     loading: filmLoading,
@@ -94,6 +94,20 @@ const EpisodeDetailsScreen: FC<EpisodeDetailsScreenProps> = props => {
   const handleOnBack = useCallback(() => {
     navigationService.goBack();
   }, []);
+
+  const handleNavigationToCharacter = useCallback(
+    (id?: string) => {
+      navigationService.push(
+        props.route.name === 'Episode_Details'
+          ? 'Episodes_Character_Details'
+          : 'Liked_Character_Details',
+        {
+          characterId: id,
+        },
+      );
+    },
+    [props.route.name],
+  );
 
   const onEndReached = async () => {
     if (
@@ -185,11 +199,7 @@ const EpisodeDetailsScreen: FC<EpisodeDetailsScreenProps> = props => {
         renderItem={({item}) => {
           return (
             <CharacterItem
-              onPress={() => {
-                navigationService.push('Episodes_Character_Details', {
-                  characterId: item?.id,
-                });
-              }}
+              onPress={() => handleNavigationToCharacter(item?.id)}
               person={item}
               style={spacingHelpers.mT8}
             />
