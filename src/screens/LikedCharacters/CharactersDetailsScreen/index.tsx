@@ -49,7 +49,6 @@ const CharactersDetailsScreen: FC<CharactersDetailsScreenProps> = props => {
       },
     },
   );
-  console.log('CharactersDetailsScreen', props.route.name);
 
   useEffect(() => {
     if (error) {

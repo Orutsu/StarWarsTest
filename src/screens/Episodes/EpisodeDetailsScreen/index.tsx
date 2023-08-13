@@ -37,7 +37,6 @@ const EpisodeDetailsScreen: FC<EpisodeDetailsScreenProps> = props => {
     setOnEndReachedCalledDuringMomentum,
   ] = useState(true);
   const [characters, setCharacters] = useState<Person[]>([]);
-  console.log('EpisodeDetailsScreen', props.route.name);
   const {
     data: filmData,
     loading: filmLoading,

@@ -9,7 +9,8 @@ import {
 } from '@apollo/client';
 import NavigationContainer from './navigationContainer';
 import {Provider} from 'react-redux';
-import store from './store';
+import {persistor, store} from './store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -23,7 +24,9 @@ const App = () => {
     <SafeAreaProvider>
       <ApolloProvider client={client}>
         <Provider store={store}>
-          <NavigationContainer />
+          <PersistGate loading={null} persistor={persistor}>
+            <NavigationContainer />
+          </PersistGate>
         </Provider>
       </ApolloProvider>
     </SafeAreaProvider>

@@ -2,12 +2,10 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Maybe, Person} from 'src/__generated__/graphql';
 
 export type LikedCharactersState = {
-  isLoading: boolean;
   likedCharacters: Maybe<Person>[];
 };
 
 const initialState: LikedCharactersState = {
-  isLoading: false,
   likedCharacters: [],
 };
 
@@ -15,10 +13,6 @@ const projectsSlice = createSlice({
   name: 'LikedCharacters',
   initialState,
   reducers: {
-    setIsLoading(state: LikedCharactersState, action: PayloadAction<boolean>) {
-      state.isLoading = action.payload;
-      return state;
-    },
     addLikedCharacter(
       state: LikedCharactersState,
       action: PayloadAction<Maybe<Person>>,
